@@ -4,14 +4,7 @@ import (
 	"fmt"
 	"github.com/anaskhan96/soup"
 	"spider/client"
-	"sync"
 )
-
-var mux sync.WaitGroup
-
-func WaitFinish() {
-	mux.Wait()
-}
 
 // xkcd main function
 func SpiderXkcd() {
