@@ -7,11 +7,23 @@ import (
 	"sync"
 )
 
-var Mux sync.WaitGroup
+var mux sync.WaitGroup
 
-func NewXkcdSpider() {
-	defer Mux.Done()
-	resp, err := client.CommonGet("https://xkcd.com", "firefox", false)
+func WaitFinish() {
+	mux.Wait()
+}
+
+// xkcd main function
+func SpiderXkcd() {
+	for i := 0; i < 3; i++ {
+		mux.Add(1)
+		go newXkcdSpider("https://xkcd.com")
+	}
+}
+
+func newXkcdSpider(path string) {
+	defer mux.Done()
+	resp, err := client.CommonGet(path, "firefox", false)
 	if err != nil {
 		return
 	}
