@@ -23,7 +23,7 @@ func SpiderXkcd() {
 
 func newXkcdSpider(path string) {
 	defer mux.Done()
-	resp, err := client.CommonGet(path, "firefox", false)
+	resp, err := client.CommonGet(path, false, true, false)
 	if err != nil {
 		return
 	}
